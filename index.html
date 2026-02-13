@@ -4,17 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Betzi ❤️</title>
-
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
 body{
-    min-height:100vh;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -22,98 +16,47 @@ body{
     color:white;
     background:url("fondo.jpg") no-repeat center center/cover;
     position:relative;
+    overflow:hidden;
 }
 
-/* overlay semi-transparente */
-.overlay{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.55);
-    top:0;
-    left:0;
-    z-index:0;
-}
+.overlay{position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.6);}
+.container{position:relative;max-width:95%;padding:25px;z-index:2;}
 
-/* contenedor principal */
-.container{
-    position:relative;
-    z-index:1;
-    max-width:95%;
-    padding:25px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-}
+h1{font-size:3.5rem;margin-bottom:20px;color:#ff4d6d;animation:brillo 2s infinite alternate;}
+@keyframes brillo{from{text-shadow:0 0 10px #ff4d6d;}to{text-shadow:0 0 30px #ff4d6d,0 0 50px #ff99aa;}}
 
-/* TITULO */
-h1{
-    font-size:2rem;
-    margin-bottom:15px;
-    animation:fadeInDown 1.5s ease;
-}
+.mensaje{font-size:1.5rem;margin-bottom:30px;line-height:1.8;}
+.contador{font-size:2.3rem;margin:30px 0;font-weight:bold;}
+.contador span{display:block;font-size:2.8rem;color:#ff4d6d;}
 
-/* MENSAJE */
-.mensaje{
-    font-size:1rem;
-    margin-bottom:25px;
-    line-height:1.6;
-}
-
-/* CONTADOR */
-.contador{
-    font-size:1.2rem;
-    margin:20px 0;
-    color:#ff4d6d;
-    font-weight:bold;
-    text-shadow:0 0 15px rgba(255,77,109,0.7);
-}
-
-.contador span{
-    display:block;
-    font-size:1.6rem;
-}
-
-/* PREGUNTA */
-.pregunta{
-    font-size:1.5rem;
-    margin:30px 0 20px 0;
-    animation:latido 1.5s infinite;
-}
-
-/* BOTONES */
-.botones{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:15px;
-    width:100%;
-}
+.pregunta{font-size:3rem;margin:40px 0 20px 0;animation:latido 1.5s infinite;}
+@keyframes latido{0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
 
 button{
-    padding:12px 25px;
+    padding:18px 35px;
+    margin:15px 10px;
     border:none;
-    border-radius:30px;
-    font-size:1rem;
+    border-radius:40px;
+    font-size:1.4rem;
     cursor:pointer;
     transition:0.3s;
 }
 
-.si{
-    background:#ff4d6d;
-    color:white;
+.si{background:#ff4d6d;color:white;box-shadow:0 0 20px #ff4d6d;}
+.si:hover{transform:scale(1.2);box-shadow:0 0 40px #ff99aa;}
+
+.no{background:gray;color:white;border-radius:40px;position:relative;}
+
+.botones{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap; /* para que en móvil no se superpongan */
 }
 
-.si:hover{
-    transform:scale(1.1);
-}
-
-.no{
-    background:gray;
-    color:white;
-    position:absolute; /* sigue huyendo */
-}
+/* Corazones */
+.heart{position:absolute;color:#ff4d6d;font-size:20px;animation:flotar linear infinite;}
+@keyframes flotar{0%{transform:translateY(100vh) scale(1);opacity:1;}100%{transform:translateY(-10vh) scale(1.5);opacity:0;}}
 
 /* POPUP */
 #popup{
@@ -132,40 +75,24 @@ button{
     z-index:1000;
     animation:aparecer 0.5s ease;
 }
-
-/* ANIMACIONES */
 @keyframes aparecer{
     0%{transform:translate(-50%,-50%) scale(0);}
     100%{transform:translate(-50%,-50%) scale(1);}
 }
 
-@keyframes fadeInDown{
-    from{opacity:0; transform:translateY(-30px);}
-    to{opacity:1; transform:translateY(0);}
-}
-
-@keyframes latido{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.08);}
-    100%{transform:scale(1);}
-}
-
-/* RESPONSIVE */
 @media(max-width:768px){
-    h1{font-size:1.8rem;}
-    .mensaje{font-size:0.95rem;}
-    .contador{font-size:1rem;}
-    .contador span{font-size:1.3rem;}
-    .pregunta{font-size:1.4rem;}
-    button{padding:10px 20px; font-size:0.9rem;}
+    h1{font-size:2.3rem;}
+    .mensaje{font-size:1.2rem;}
+    .contador{font-size:1.6rem;}
+    .contador span{font-size:2rem;}
+    .pregunta{font-size:2rem;}
+    button{padding:12px 25px;font-size:1rem;}
 }
 </style>
 </head>
-
 <body>
 
-<!-- MUSICA -->
-<audio id="musica" autoplay loop>
+<audio id="musica" loop>
     <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
@@ -173,83 +100,63 @@ button{
 
 <div class="container">
     <h1>Hola Betzi, amor ❤️</h1>
-
-    <p class="mensaje">
-        Desde aquel 10 de agosto de 2018, mi vida cambió para siempre.
-        No fue solo un día más… fue el inicio de algo que el tiempo no ha podido borrar.
-        Cada segundo contigo ha sido una razón más para sonreír,
-        y cada momento juntos se convirtió en un recuerdo que quiero repetir toda la vida.
-    </p>
-
-    <div class="contador">
-        Llevamos juntos:
-        <span id="tiempo"></span>
-    </div>
-
-    <div class="pregunta">
-        ¿Quieres ser mi San Valentín? 💖
-    </div>
-
+    <p class="mensaje">Desde aquel 10 de agosto de 2018 a las 7:00 AM, mi vida cambió para siempre 💕</p>
+    <div class="contador">Llevamos juntos:<span id="tiempo"></span></div>
+    <div class="pregunta">¿Quieres ser mi San Valentín? 💖</div>
     <div class="botones">
-        <button class="si">Sí ❤️</button>
+        <button class="si" onclick="respuestaSi()">Sí ❤️</button>
         <button class="no" id="noBtn">No 😏</button>
     </div>
 </div>
 
 <!-- POPUP -->
-<div id="popup">
-    Eres el amor de mi vida 😍💖
-</div>
+<div id="popup">Sabía que dirías que sí ❤️<br>Eres el amor de mi vida 💕</div>
 
 <script>
-// CONTADOR DE TIEMPO
-const inicio = new Date("August 10, 2018 08:51:00").getTime();
+// contador
+const inicio = new Date("2018-08-10T07:00:00").getTime();
 const tiempoEl = document.getElementById("tiempo");
-
-setInterval(()=>{
+function actualizarContador(){
     const ahora = new Date().getTime();
     const diferencia = ahora - inicio;
-
-    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-    const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+    const dias = Math.floor(diferencia / (1000*60*60*24));
+    const horas = Math.floor((diferencia / (1000*60*60)) % 24);
+    const minutos = Math.floor((diferencia / (1000*60)) % 60);
     const segundos = Math.floor((diferencia / 1000) % 60);
+    tiempoEl.innerHTML = dias+" días 💕<br>"+horas+" horas 💕<br>"+minutos+" minutos 💕<br>"+segundos+" segundos 💕";
+}
+setInterval(actualizarContador,1000);actualizarContador();
 
-    tiempoEl.innerHTML = 
-        dias + " días 💕<br>" +
-        horas + " horas 💕<br>" +
-        minutos + " minutos 💕<br>" +
-        segundos + " segundos 💕";
-
-},1000);
-
-// BOTON NO HUYE
+// botón No que huye
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseover", ()=>{
-    noBtn.style.top = Math.random() * (window.innerHeight - noBtn.offsetHeight) + "px";
-    noBtn.style.left = Math.random() * (window.innerWidth - noBtn.offsetWidth) + "px";
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
+    noBtn.style.position = "fixed";
+    noBtn.style.left = Math.random()*maxX+"px";
+    noBtn.style.top = Math.random()*maxY+"px";
 });
 
-// BOTON SI POPUP + MUSICA + RESPUESTA
-const btnSi = document.querySelector(".si");
-const popup = document.getElementById("popup");
-const musica = document.getElementById("musica");
-
-btnSi.addEventListener("click", ()=>{
-    popup.style.display = "block";
+// respuesta Sí con popup y música
+function respuestaSi(){
+    const musica = document.getElementById("musica");
+    const popup = document.getElementById("popup");
     musica.play().catch(()=>{});
-    localStorage.setItem("respuesta", "si");
-    setTimeout(()=>{popup.style.display = "none";}, 5000);
-});
+    popup.style.display = "block";
+    setTimeout(()=>{popup.style.display="none";},5000);
+}
 
-// CLICK EN NO GUARDAR RESPUESTA
-noBtn.addEventListener("click", ()=>{
-    localStorage.setItem("respuesta", "no");
-});
-
-// OPCIONAL: ver respuesta en consola
-console.log("Respuesta guardada:", localStorage.getItem("respuesta"));
+// corazones flotando
+function crearCorazon(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100+"vw";
+    heart.style.animationDuration = (Math.random()*3+3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>{heart.remove();},6000);
+}
+setInterval(crearCorazon,300);
 </script>
-
 </body>
 </html>
