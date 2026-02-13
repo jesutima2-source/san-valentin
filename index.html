@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Betzi ❤️</title>
-
 <style>
 *{
     margin:0;
@@ -106,7 +105,8 @@ button{
     background:gray;
     color:white;
     border-radius:40px;
-    position:absolute; /* ahora se mueve dentro del contenedor */
+    position:fixed; /* vuelve a ser fijo para escapar */
+    z-index:999;
 }
 
 /* Contenedor de botones */
@@ -145,10 +145,9 @@ button{
 }
 </style>
 </head>
-
 <body>
 
-<audio id="musica" loop>
+<audio id="musica" autoplay loop muted>
     <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
@@ -156,21 +155,9 @@ button{
 
 <div class="container">
     <h1>Hola Betzi, amor ❤️</h1>
-
-    <p class="mensaje">
-        Desde aquel 10 de agosto de 2018 a las 7:00 AM,
-        mi vida cambió para siempre 💕
-    </p>
-
-    <div class="contador">
-        Llevamos juntos:
-        <span id="tiempo"></span>
-    </div>
-
-    <div class="pregunta">
-        ¿Quieres ser mi San Valentín? 💖
-    </div>
-
+    <p class="mensaje">Desde aquel 10 de agosto de 2018 a las 7:00 AM, mi vida cambió para siempre 💕</p>
+    <div class="contador">Llevamos juntos:<span id="tiempo"></span></div>
+    <div class="pregunta">¿Quieres ser mi San Valentín? 💖</div>
     <div class="botones">
         <button class="si" onclick="respuestaSi()">Sí ❤️</button>
         <button class="no" id="noBtn">No 😏</button>
@@ -203,19 +190,23 @@ actualizarContador();
 
 // BOTÓN QUE HUYE
 const noBtn = document.getElementById("noBtn");
-
 noBtn.addEventListener("mouseover", ()=>{
     const maxX = window.innerWidth - noBtn.offsetWidth;
     const maxY = window.innerHeight - noBtn.offsetHeight;
-
     noBtn.style.left = Math.random() * maxX + "px";
     noBtn.style.top = Math.random() * maxY + "px";
 });
 
-// RESPUESTA SI
+// Música desde inicio
+window.addEventListener("load", ()=>{
+    const musica = document.getElementById("musica");
+    musica.muted = false;
+    musica.play().catch(()=>{});
+});
+
+// RESPUESTA Sí -> redirección a otra página
 function respuestaSi(){
-    document.getElementById("musica").play(); // música inicia aquí
-    alert("Sabía que dirías que sí ❤️ Eres el amor de mi vida 💕");
+    window.location.href = "respuesta.html";
 }
 
 // CORAZONES FLOTANDO
@@ -231,9 +222,7 @@ function crearCorazon(){
         heart.remove();
     },6000);
 }
-
 setInterval(crearCorazon,300);
 </script>
-
 </body>
 </html>
