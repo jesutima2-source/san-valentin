@@ -4,8 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Betzi ❤️</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
 
 body{
     height:100vh;
@@ -16,55 +22,135 @@ body{
     color:white;
     background:url("fondo.jpg") no-repeat center center/cover;
     position:relative;
-    overflow:hidden;
 }
 
-.overlay{position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.6);}
-.container{position:relative;max-width:95%;padding:25px;z-index:2;}
+.overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.55);
+}
 
-h1{font-size:3.5rem;margin-bottom:20px;color:#ff4d6d;animation:brillo 2s infinite alternate;}
-@keyframes brillo{from{text-shadow:0 0 10px #ff4d6d;}to{text-shadow:0 0 30px #ff4d6d,0 0 50px #ff99aa;}}
+.container{
+    position:relative;
+    max-width:90%;
+    padding:20px;
+    animation:fadeIn 2s ease;
+}
 
-.mensaje{font-size:1.5rem;margin-bottom:30px;line-height:1.8;}
-.contador{font-size:2.3rem;margin:30px 0;font-weight:bold;}
-.contador span{display:block;font-size:2.8rem;color:#ff4d6d;}
+h1{
+    font-size:2.2rem;
+    margin-bottom:15px;
+    animation:fadeInDown 1.5s ease;
+}
 
-.pregunta{font-size:3rem;margin:40px 0 20px 0;animation:latido 1.5s infinite;}
-@keyframes latido{0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
+.mensaje{
+    font-size:1rem;
+    margin-bottom:25px;
+    line-height:1.6;
+}
+
+.contador{
+    font-size:1.4rem;
+    margin:20px 0;
+    color:#ff4d6d;
+    font-weight:bold;
+    text-shadow:0 0 15px rgba(255,77,109,0.7);
+}
+
+.contador span{
+    display:block;
+    font-size:1.8rem;
+}
+
+.pregunta{
+    font-size:1.8rem;
+    margin:30px 0 20px 0;
+    animation:latido 1.5s infinite;
+}
+
+.botones{
+    margin-top:10px;
+}
 
 button{
-    padding:18px 35px;
-    margin:15px;
+    padding:12px 25px;
+    margin:10px;
     border:none;
-    border-radius:40px;
-    font-size:1.4rem;
+    border-radius:30px;
+    font-size:1rem;
     cursor:pointer;
     transition:0.3s;
 }
 
-.si{background:#ff4d6d;color:white;box-shadow:0 0 20px #ff4d6d;}
-.si:hover{transform:scale(1.2);box-shadow:0 0 40px #ff99aa;}
+.si{
+    background:#ff4d6d;
+    color:white;
+}
 
-.no{background:gray;color:white;border-radius:40px;position:relative;}
+.si:hover{
+    transform:scale(1.1);
+}
 
-.botones{display:flex;justify-content:center;gap:20px;}
+.no{
+    background:gray;
+    color:white;
+    position:absolute;
+}
 
-/* Corazones */
-.heart{position:absolute;color:#ff4d6d;font-size:20px;animation:flotar linear infinite;}
-@keyframes flotar{0%{transform:translateY(100vh) scale(1);opacity:1;}100%{transform:translateY(-10vh) scale(1.5);opacity:0;}}
+/* POPUP */
+#popup{
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(0,0,0,0.9);
+    color:#ff4d6d;
+    padding:40px 60px;
+    border-radius:20px;
+    text-align:center;
+    font-size:2rem;
+    box-shadow:0 0 50px #ff4d6d;
+    z-index:1000;
+    animation:aparecer 0.5s ease;
+}
 
-@media(max-width:768px){
-    h1{font-size:2.3rem;}
+@keyframes aparecer{
+    0%{transform:translate(-50%,-50%) scale(0);}
+    100%{transform:translate(-50%,-50%) scale(1);}
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+@keyframes fadeInDown{
+    from{opacity:0; transform:translateY(-30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes latido{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.08);}
+    100%{transform:scale(1);}
+}
+
+@media(min-width:768px){
+    h1{font-size:3rem;}
     .mensaje{font-size:1.2rem;}
-    .contador{font-size:1.6rem;}
-    .contador span{font-size:2rem;}
-    .pregunta{font-size:2rem;}
+    .contador{font-size:1.8rem;}
+    .contador span{font-size:2.5rem;}
+    .pregunta{font-size:2.2rem;}
 }
 </style>
 </head>
+
 <body>
 
-<audio id="musica" autoplay loop muted>
+<!-- MUSICA -->
+<audio id="musica" autoplay loop>
     <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
@@ -72,63 +158,83 @@ button{
 
 <div class="container">
     <h1>Hola Betzi, amor ❤️</h1>
-    <p class="mensaje">Desde aquel 10 de agosto de 2018 a las 7:00 AM, mi vida cambió para siempre 💕</p>
-    <div class="contador">Llevamos juntos:<span id="tiempo"></span></div>
-    <div class="pregunta">¿Quieres ser mi San Valentín? 💖</div>
+
+    <p class="mensaje">
+        Desde aquel 10 de agosto de 2018 a las 8:51, mi vida cambió para siempre.
+        No fue solo un día más… fue el inicio de algo que el tiempo no ha podido borrar.
+        Cada segundo contigo ha sido una razón más para sonreír,
+        y cada momento juntos se convirtió en un recuerdo que quiero repetir toda la vida.
+    </p>
+
+    <div class="contador">
+        Llevamos juntos:
+        <span id="tiempo"></span>
+    </div>
+
+    <div class="pregunta">
+        ¿Quieres ser mi San Valentín? 💖
+    </div>
+
     <div class="botones">
-        <button class="si" onclick="respuestaSi()">Sí ❤️</button>
+        <button class="si">Sí ❤️</button>
         <button class="no" id="noBtn">No 😏</button>
     </div>
 </div>
 
+<!-- POPUP -->
+<div id="popup">
+    Eres el amor de mi vida 😍💖
+</div>
+
 <script>
-// contador
-const inicio = new Date("2018-08-10T07:00:00").getTime();
+// ========== CONTADOR ==========
+const inicio = new Date("August 10, 2018 08:51:00").getTime();
 const tiempoEl = document.getElementById("tiempo");
-function actualizarContador(){
+
+setInterval(()=>{
     const ahora = new Date().getTime();
     const diferencia = ahora - inicio;
-    const dias = Math.floor(diferencia / (1000*60*60*24));
-    const horas = Math.floor((diferencia / (1000*60*60)) % 24);
-    const minutos = Math.floor((diferencia / (1000*60)) % 60);
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
     const segundos = Math.floor((diferencia / 1000) % 60);
-    tiempoEl.innerHTML = dias+" días 💕<br>"+horas+" horas 💕<br>"+minutos+" minutos 💕<br>"+segundos+" segundos 💕";
-}
-setInterval(actualizarContador,1000);actualizarContador();
 
-// música desde inicio
-window.addEventListener("load", ()=>{
-    const musica = document.getElementById("musica");
-    musica.muted = false;
-    musica.play().catch(()=>{});
-});
+    tiempoEl.innerHTML = 
+        dias + " días 💕<br>" +
+        horas + " horas 💕<br>" +
+        minutos + " minutos 💕<br>" +
+        segundos + " segundos 💕";
 
-// botón No que huye
+},1000);
+
+// ========== BOTON NO HUYE ==========
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseover", ()=>{
-    const maxX = window.innerWidth - noBtn.offsetWidth;
-    const maxY = window.innerHeight - noBtn.offsetHeight;
-    noBtn.style.position = "fixed"; // se vuelve fijo al escapar
-    noBtn.style.left = Math.random()*maxX+"px";
-    noBtn.style.top = Math.random()*maxY+"px";
+    noBtn.style.top = Math.random() * (window.innerHeight - noBtn.offsetHeight) + "px";
+    noBtn.style.left = Math.random() * (window.innerWidth - noBtn.offsetWidth) + "px";
 });
 
-// respuesta Sí
-function respuestaSi(){
-    alert("Sabía que dirías que sí ❤️ Eres el amor de mi vida 💕");
-}
+// ========== BOTON SI POPUP + MUSICA + REGISTRO ==========
+const btnSi = document.querySelector(".si");
+const popup = document.getElementById("popup");
+const musica = document.getElementById("musica");
 
-// corazones flotando
-function crearCorazon(){
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100+"vw";
-    heart.style.animationDuration = (Math.random()*3+3)+"s";
-    document.body.appendChild(heart);
-    setTimeout(()=>{heart.remove();},6000);
-}
-setInterval(crearCorazon,300);
+btnSi.addEventListener("click", ()=>{
+    popup.style.display = "block";
+    musica.play().catch(()=>{}); // reproducir música
+    localStorage.setItem("respuesta", "si"); // guardar respuesta
+    setTimeout(()=>{popup.style.display = "none";}, 5000); // cerrar popup
+});
+
+// GUARDAR respuesta NO si hace click
+noBtn.addEventListener("click", ()=>{
+    localStorage.setItem("respuesta", "no");
+});
+
+// OPCIONAL: ver respuesta en consola
+console.log("Respuesta guardada:", localStorage.getItem("respuesta"));
 </script>
+
 </body>
 </html>
