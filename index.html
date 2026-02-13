@@ -5,12 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Betzi ❤️</title>
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
 body{
     height:100vh;
@@ -24,61 +19,18 @@ body{
     overflow:hidden;
 }
 
-.overlay{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.6);
-}
+.overlay{position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.6);}
+.container{position:relative;max-width:95%;padding:25px;z-index:2;}
 
-.container{
-    position:relative;
-    max-width:95%;
-    padding:25px;
-    z-index:2;
-}
+h1{font-size:3.5rem;margin-bottom:20px;color:#ff4d6d;animation:brillo 2s infinite alternate;}
+@keyframes brillo{from{text-shadow:0 0 10px #ff4d6d;}to{text-shadow:0 0 30px #ff4d6d,0 0 50px #ff99aa;}}
 
-h1{
-    font-size:3.5rem;
-    margin-bottom:20px;
-    color:#ff4d6d;
-    animation:brillo 2s infinite alternate;
-}
+.mensaje{font-size:1.5rem;margin-bottom:30px;line-height:1.8;}
+.contador{font-size:2.3rem;margin:30px 0;font-weight:bold;}
+.contador span{display:block;font-size:2.8rem;color:#ff4d6d;}
 
-@keyframes brillo{
-    from{ text-shadow:0 0 10px #ff4d6d; }
-    to{ text-shadow:0 0 30px #ff4d6d, 0 0 50px #ff99aa; }
-}
-
-.mensaje{
-    font-size:1.5rem;
-    margin-bottom:30px;
-    line-height:1.8;
-}
-
-.contador{
-    font-size:2.3rem;
-    margin:30px 0;
-    font-weight:bold;
-}
-
-.contador span{
-    display:block;
-    font-size:2.8rem;
-    color:#ff4d6d;
-}
-
-.pregunta{
-    font-size:3rem;
-    margin:40px 0 20px 0;
-    animation:latido 1.5s infinite;
-}
-
-@keyframes latido{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-    100%{transform:scale(1);}
-}
+.pregunta{font-size:3rem;margin:40px 0 20px 0;animation:latido 1.5s infinite;}
+@keyframes latido{0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
 
 button{
     padding:18px 35px;
@@ -90,51 +42,16 @@ button{
     transition:0.3s;
 }
 
-.si{
-    background:#ff4d6d;
-    color:white;
-    box-shadow:0 0 20px #ff4d6d;
-}
+.si{background:#ff4d6d;color:white;box-shadow:0 0 20px #ff4d6d;}
+.si:hover{transform:scale(1.2);box-shadow:0 0 40px #ff99aa;}
 
-.si:hover{
-    transform:scale(1.2);
-    box-shadow:0 0 40px #ff99aa;
-}
+.no{background:gray;color:white;border-radius:40px;position:relative;}
 
-.no{
-    background:gray;
-    color:white;
-    border-radius:40px;
-    position:fixed; /* vuelve a ser fijo para escapar */
-    z-index:999;
-}
-
-/* Contenedor de botones */
-.botones{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    position:relative;
-}
+.botones{display:flex;justify-content:center;gap:20px;}
 
 /* Corazones */
-.heart{
-    position:absolute;
-    color:#ff4d6d;
-    font-size:20px;
-    animation:flotar linear infinite;
-}
-
-@keyframes flotar{
-    0%{
-        transform:translateY(100vh) scale(1);
-        opacity:1;
-    }
-    100%{
-        transform:translateY(-10vh) scale(1.5);
-        opacity:0;
-    }
-}
+.heart{position:absolute;color:#ff4d6d;font-size:20px;animation:flotar linear infinite;}
+@keyframes flotar{0%{transform:translateY(100vh) scale(1);opacity:1;}100%{transform:translateY(-10vh) scale(1.5);opacity:0;}}
 
 @media(max-width:768px){
     h1{font-size:2.3rem;}
@@ -165,62 +82,51 @@ button{
 </div>
 
 <script>
-// FECHA INICIO
+// contador
 const inicio = new Date("2018-08-10T07:00:00").getTime();
 const tiempoEl = document.getElementById("tiempo");
-
 function actualizarContador(){
     const ahora = new Date().getTime();
     const diferencia = ahora - inicio;
-
-    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-    const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+    const dias = Math.floor(diferencia / (1000*60*60*24));
+    const horas = Math.floor((diferencia / (1000*60*60)) % 24);
+    const minutos = Math.floor((diferencia / (1000*60)) % 60);
     const segundos = Math.floor((diferencia / 1000) % 60);
-
-    tiempoEl.innerHTML = 
-        dias + " días 💕<br>" +
-        horas + " horas 💕<br>" +
-        minutos + " minutos 💕<br>" +
-        segundos + " segundos 💕";
+    tiempoEl.innerHTML = dias+" días 💕<br>"+horas+" horas 💕<br>"+minutos+" minutos 💕<br>"+segundos+" segundos 💕";
 }
+setInterval(actualizarContador,1000);actualizarContador();
 
-setInterval(actualizarContador,1000);
-actualizarContador();
-
-// BOTÓN QUE HUYE
-const noBtn = document.getElementById("noBtn");
-noBtn.addEventListener("mouseover", ()=>{
-    const maxX = window.innerWidth - noBtn.offsetWidth;
-    const maxY = window.innerHeight - noBtn.offsetHeight;
-    noBtn.style.left = Math.random() * maxX + "px";
-    noBtn.style.top = Math.random() * maxY + "px";
-});
-
-// Música desde inicio
+// música desde inicio
 window.addEventListener("load", ()=>{
     const musica = document.getElementById("musica");
     musica.muted = false;
     musica.play().catch(()=>{});
 });
 
-// RESPUESTA Sí -> redirección a otra página
+// botón No que huye
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", ()=>{
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
+    noBtn.style.position = "fixed"; // se vuelve fijo al escapar
+    noBtn.style.left = Math.random()*maxX+"px";
+    noBtn.style.top = Math.random()*maxY+"px";
+});
+
+// respuesta Sí
 function respuestaSi(){
-    window.location.href = "respuesta.html";
+    alert("Sabía que dirías que sí ❤️ Eres el amor de mi vida 💕");
 }
 
-// CORAZONES FLOTANDO
+// corazones flotando
 function crearCorazon(){
     const heart = document.createElement("div");
     heart.classList.add("heart");
     heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    heart.style.left = Math.random()*100+"vw";
+    heart.style.animationDuration = (Math.random()*3+3)+"s";
     document.body.appendChild(heart);
-
-    setTimeout(()=>{
-        heart.remove();
-    },6000);
+    setTimeout(()=>{heart.remove();},6000);
 }
 setInterval(crearCorazon,300);
 </script>
