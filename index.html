@@ -36,14 +36,12 @@ body{
     position:relative;
     max-width:90%;
     padding:20px;
-    animation:fadeIn 2s ease;
     z-index:2;
 }
 
 h1{
     font-size:2.5rem;
     margin-bottom:15px;
-    animation:fadeInDown 1.5s ease;
 }
 
 .mensaje{
@@ -57,7 +55,6 @@ h1{
     margin:20px 0;
     color:#ff4d6d;
     font-weight:bold;
-    text-shadow:0 0 15px rgba(255,77,109,0.8);
 }
 
 .contador span{
@@ -68,11 +65,6 @@ h1{
 .pregunta{
     font-size:2rem;
     margin:30px 0 20px 0;
-    animation:latido 1.5s infinite;
-}
-
-.botones{
-    margin-top:10px;
 }
 
 button{
@@ -100,30 +92,6 @@ button{
     position:fixed;
     z-index:999;
 }
-
-@keyframes fadeIn{
-    from{opacity:0;}
-    to{opacity:1;}
-}
-
-@keyframes fadeInDown{
-    from{opacity:0; transform:translateY(-30px);}
-    to{opacity:1; transform:translateY(0);}
-}
-
-@keyframes latido{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.08);}
-    100%{transform:scale(1);}
-}
-
-@media(min-width:768px){
-    h1{font-size:3rem;}
-    .mensaje{font-size:1.3rem;}
-    .contador{font-size:2rem;}
-    .contador span{font-size:2.5rem;}
-    .pregunta{font-size:2.5rem;}
-}
 </style>
 </head>
 
@@ -135,10 +103,8 @@ button{
     <h1>Hola Betzi, amor ❤️</h1>
 
     <p class="mensaje">
-        Desde aquel 10 de agosto de 2018, mi vida cambió para siempre.
+        Desde aquel 10 de agosto de 2018 a las 7:00 AM, mi vida cambió para siempre.
         No fue solo un día más… fue el inicio de algo que el tiempo no ha podido borrar.
-        Cada segundo contigo ha sido una razón más para sonreír,
-        y cada momento juntos se convirtió en un recuerdo que quiero repetir toda la vida.
     </p>
 
     <div class="contador">
@@ -150,18 +116,18 @@ button{
         ¿Quieres ser mi San Valentín? 💖
     </div>
 
-    <div class="botones">
-        <button class="si" onclick="respuestaSi()">Sí ❤️</button>
-        <button class="no" id="noBtn">No 😏</button>
-    </div>
+    <button class="si" onclick="respuestaSi()">Sí ❤️</button>
+    <button class="no" id="noBtn">No 😏</button>
 </div>
 
 <script>
 
-const inicio = new Date(2018, 7, 10, 9, 17, 0).getTime();
+// FECHA EXACTA (formato seguro ISO)
+const inicio = new Date("2018-08-10T07:00:00").getTime();
+
 const tiempoEl = document.getElementById("tiempo");
 
-setInterval(()=>{
+function actualizarContador(){
     const ahora = new Date().getTime();
     const diferencia = ahora - inicio;
 
@@ -175,10 +141,13 @@ setInterval(()=>{
         horas + " horas 💕<br>" +
         minutos + " minutos 💕<br>" +
         segundos + " segundos 💕";
+}
 
-},1000);
+actualizarContador();
+setInterval(actualizarContador,1000);
 
 
+// BOTÓN QUE HUYE
 const noBtn = document.getElementById("noBtn");
 
 noBtn.addEventListener("mouseover", ()=>{
@@ -218,11 +187,8 @@ function respuestaSi(){
                 Sabía que dirías que sí, mi Betzi hermosa ❤️
             </h1>
             <p style="font-size:1.5rem; margin-top:20px;">
-                Gracias por elegirme desde aquel 10 de agosto de 2018 💕
+                Desde el 10 de agosto de 2018 a las 7:00 AM 💕
             </p>
-            <h2 style="margin-top:20px;">
-                Prometo seguir haciendo que cada segundo valga la pena ⏳💖
-            </h2>
         </div>
     </div>
     `;
