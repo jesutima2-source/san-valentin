@@ -105,8 +105,16 @@ button{
 .no{
     background:gray;
     color:white;
-    position:fixed;
-    z-index:999;
+    border-radius:40px;
+    position:absolute; /* ahora se mueve dentro del contenedor */
+}
+
+/* Contenedor de botones */
+.botones{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    position:relative;
 }
 
 /* Corazones */
@@ -140,7 +148,7 @@ button{
 
 <body>
 
-<audio autoplay loop>
+<audio id="musica" loop>
     <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
@@ -163,12 +171,13 @@ button{
         ¿Quieres ser mi San Valentín? 💖
     </div>
 
-    <button class="si" onclick="respuestaSi()">Sí ❤️</button>
-    <button class="no" id="noBtn">No 😏</button>
+    <div class="botones">
+        <button class="si" onclick="respuestaSi()">Sí ❤️</button>
+        <button class="no" id="noBtn">No 😏</button>
+    </div>
 </div>
 
 <script>
-
 // FECHA INICIO
 const inicio = new Date("2018-08-10T07:00:00").getTime();
 const tiempoEl = document.getElementById("tiempo");
@@ -192,7 +201,6 @@ function actualizarContador(){
 setInterval(actualizarContador,1000);
 actualizarContador();
 
-
 // BOTÓN QUE HUYE
 const noBtn = document.getElementById("noBtn");
 
@@ -204,12 +212,11 @@ noBtn.addEventListener("mouseover", ()=>{
     noBtn.style.top = Math.random() * maxY + "px";
 });
 
-
 // RESPUESTA SI
 function respuestaSi(){
+    document.getElementById("musica").play(); // música inicia aquí
     alert("Sabía que dirías que sí ❤️ Eres el amor de mi vida 💕");
 }
-
 
 // CORAZONES FLOTANDO
 function crearCorazon(){
@@ -226,7 +233,6 @@ function crearCorazon(){
 }
 
 setInterval(crearCorazon,300);
-
 </script>
 
 </body>
