@@ -14,7 +14,7 @@
 }
 
 body{
-    height:100vh;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -24,34 +24,46 @@ body{
     position:relative;
 }
 
+/* overlay semi-transparente */
 .overlay{
     position:absolute;
     width:100%;
     height:100%;
     background:rgba(0,0,0,0.55);
+    top:0;
+    left:0;
+    z-index:0;
 }
 
+/* contenedor principal */
 .container{
     position:relative;
-    max-width:90%;
-    padding:20px;
-    animation:fadeIn 2s ease;
+    z-index:1;
+    max-width:95%;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 
+/* TITULO */
 h1{
-    font-size:2.2rem;
+    font-size:2rem;
     margin-bottom:15px;
     animation:fadeInDown 1.5s ease;
 }
 
+/* MENSAJE */
 .mensaje{
     font-size:1rem;
     margin-bottom:25px;
     line-height:1.6;
 }
 
+/* CONTADOR */
 .contador{
-    font-size:1.4rem;
+    font-size:1.2rem;
     margin:20px 0;
     color:#ff4d6d;
     font-weight:bold;
@@ -60,22 +72,27 @@ h1{
 
 .contador span{
     display:block;
-    font-size:1.8rem;
+    font-size:1.6rem;
 }
 
+/* PREGUNTA */
 .pregunta{
-    font-size:1.8rem;
+    font-size:1.5rem;
     margin:30px 0 20px 0;
     animation:latido 1.5s infinite;
 }
 
+/* BOTONES */
 .botones{
-    margin-top:10px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    width:100%;
 }
 
 button{
     padding:12px 25px;
-    margin:10px;
     border:none;
     border-radius:30px;
     font-size:1rem;
@@ -95,7 +112,7 @@ button{
 .no{
     background:gray;
     color:white;
-    position:absolute;
+    position:absolute; /* sigue huyendo */
 }
 
 /* POPUP */
@@ -110,20 +127,16 @@ button{
     padding:40px 60px;
     border-radius:20px;
     text-align:center;
-    font-size:2rem;
+    font-size:1.8rem;
     box-shadow:0 0 50px #ff4d6d;
     z-index:1000;
     animation:aparecer 0.5s ease;
 }
 
+/* ANIMACIONES */
 @keyframes aparecer{
     0%{transform:translate(-50%,-50%) scale(0);}
     100%{transform:translate(-50%,-50%) scale(1);}
-}
-
-@keyframes fadeIn{
-    from{opacity:0;}
-    to{opacity:1;}
 }
 
 @keyframes fadeInDown{
@@ -137,12 +150,14 @@ button{
     100%{transform:scale(1);}
 }
 
-@media(min-width:768px){
-    h1{font-size:3rem;}
-    .mensaje{font-size:1.2rem;}
-    .contador{font-size:1.8rem;}
-    .contador span{font-size:2.5rem;}
-    .pregunta{font-size:2.2rem;}
+/* RESPONSIVE */
+@media(max-width:768px){
+    h1{font-size:1.8rem;}
+    .mensaje{font-size:0.95rem;}
+    .contador{font-size:1rem;}
+    .contador span{font-size:1.3rem;}
+    .pregunta{font-size:1.4rem;}
+    button{padding:10px 20px; font-size:0.9rem;}
 }
 </style>
 </head>
@@ -160,7 +175,7 @@ button{
     <h1>Hola Betzi, amor ❤️</h1>
 
     <p class="mensaje">
-        Desde aquel 10 de agosto de 2018 a las 8:51, mi vida cambió para siempre.
+        Desde aquel 10 de agosto de 2018, mi vida cambió para siempre.
         No fue solo un día más… fue el inicio de algo que el tiempo no ha podido borrar.
         Cada segundo contigo ha sido una razón más para sonreír,
         y cada momento juntos se convirtió en un recuerdo que quiero repetir toda la vida.
@@ -187,7 +202,7 @@ button{
 </div>
 
 <script>
-// ========== CONTADOR ==========
+// CONTADOR DE TIEMPO
 const inicio = new Date("August 10, 2018 08:51:00").getTime();
 const tiempoEl = document.getElementById("tiempo");
 
@@ -208,26 +223,26 @@ setInterval(()=>{
 
 },1000);
 
-// ========== BOTON NO HUYE ==========
+// BOTON NO HUYE
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseover", ()=>{
     noBtn.style.top = Math.random() * (window.innerHeight - noBtn.offsetHeight) + "px";
     noBtn.style.left = Math.random() * (window.innerWidth - noBtn.offsetWidth) + "px";
 });
 
-// ========== BOTON SI POPUP + MUSICA + REGISTRO ==========
+// BOTON SI POPUP + MUSICA + RESPUESTA
 const btnSi = document.querySelector(".si");
 const popup = document.getElementById("popup");
 const musica = document.getElementById("musica");
 
 btnSi.addEventListener("click", ()=>{
     popup.style.display = "block";
-    musica.play().catch(()=>{}); // reproducir música
-    localStorage.setItem("respuesta", "si"); // guardar respuesta
-    setTimeout(()=>{popup.style.display = "none";}, 5000); // cerrar popup
+    musica.play().catch(()=>{});
+    localStorage.setItem("respuesta", "si");
+    setTimeout(()=>{popup.style.display = "none";}, 5000);
 });
 
-// GUARDAR respuesta NO si hace click
+// CLICK EN NO GUARDAR RESPUESTA
 noBtn.addEventListener("click", ()=>{
     localStorage.setItem("respuesta", "no");
 });
