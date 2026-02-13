@@ -22,6 +22,7 @@ body{
     color:white;
     background:url("fondo.jpg") no-repeat center center/cover;
     position:relative;
+    overflow:hidden;
 }
 
 .overlay{
@@ -36,35 +37,36 @@ body{
     max-width:90%;
     padding:20px;
     animation:fadeIn 2s ease;
+    z-index:2;
 }
 
 h1{
-    font-size:2.2rem;
+    font-size:2.5rem;
     margin-bottom:15px;
     animation:fadeInDown 1.5s ease;
 }
 
 .mensaje{
-    font-size:1rem;
+    font-size:1.1rem;
     margin-bottom:25px;
     line-height:1.6;
 }
 
 .contador{
-    font-size:1.4rem;
+    font-size:1.6rem;
     margin:20px 0;
     color:#ff4d6d;
     font-weight:bold;
-    text-shadow:0 0 15px rgba(255,77,109,0.7);
+    text-shadow:0 0 15px rgba(255,77,109,0.8);
 }
 
 .contador span{
     display:block;
-    font-size:1.8rem;
+    font-size:2rem;
 }
 
 .pregunta{
-    font-size:1.8rem;
+    font-size:2rem;
     margin:30px 0 20px 0;
     animation:latido 1.5s infinite;
 }
@@ -95,7 +97,8 @@ button{
 .no{
     background:gray;
     color:white;
-    position:absolute;
+    position:fixed;
+    z-index:999;
 }
 
 @keyframes fadeIn{
@@ -116,10 +119,10 @@ button{
 
 @media(min-width:768px){
     h1{font-size:3rem;}
-    .mensaje{font-size:1.2rem;}
-    .contador{font-size:1.8rem;}
+    .mensaje{font-size:1.3rem;}
+    .contador{font-size:2rem;}
     .contador span{font-size:2.5rem;}
-    .pregunta{font-size:2.2rem;}
+    .pregunta{font-size:2.5rem;}
 }
 </style>
 </head>
@@ -132,7 +135,7 @@ button{
     <h1>Hola Betzi, amor ❤️</h1>
 
     <p class="mensaje">
-        Desde aquel 10 de agosto de 2018 a las 8:51, mi vida cambió para siempre.
+        Desde aquel 10 de agosto de 2018, mi vida cambió para siempre.
         No fue solo un día más… fue el inicio de algo que el tiempo no ha podido borrar.
         Cada segundo contigo ha sido una razón más para sonreír,
         y cada momento juntos se convirtió en un recuerdo que quiero repetir toda la vida.
@@ -148,7 +151,7 @@ button{
     </div>
 
     <div class="botones">
-        <button class="si">Sí ❤️</button>
+        <button class="si" onclick="respuestaSi()">Sí ❤️</button>
         <button class="no" id="noBtn">No 😏</button>
     </div>
 </div>
@@ -179,12 +182,53 @@ setInterval(()=>{
 const noBtn = document.getElementById("noBtn");
 
 noBtn.addEventListener("mouseover", ()=>{
-    noBtn.style.top = Math.random() * window.innerHeight + "px";
-    noBtn.style.left = Math.random() * window.innerWidth + "px";
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
 });
+
+
+function respuestaSi(){
+    document.body.innerHTML = `
+    <div style="
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+        background:url('fondo.jpg') center/cover no-repeat;
+        color:white;
+        font-family:Segoe UI;
+        position:relative;
+    ">
+        <div style="
+            position:absolute;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.6);
+        "></div>
+
+        <div style="position:relative; z-index:2;">
+            <h1 style="font-size:3rem; color:#ff4d6d;">
+                Sabía que dirías que sí, mi Betzi hermosa ❤️
+            </h1>
+            <p style="font-size:1.5rem; margin-top:20px;">
+                Gracias por elegirme desde aquel 10 de agosto de 2018 💕
+            </p>
+            <h2 style="margin-top:20px;">
+                Prometo seguir haciendo que cada segundo valga la pena ⏳💖
+            </h2>
+        </div>
+    </div>
+    `;
+}
 
 </script>
 
 </body>
 </html>
-
